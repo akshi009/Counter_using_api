@@ -20,7 +20,7 @@ app.use(express.json()); //to parse JSON data
 mongoose.connect('mongodb+srv://akshi20jain03:niXKH4b2LEX0aYea@learnings.baxbn3r.mongodb.net/count_db').then(()=>console.log('mongodb connected')).catch((err)=>console.log('mongodb err: ',err))
 
 //user schema
- const userSchema = new mongoose.Schema({
+ const countSchema = new mongoose.Schema({
   count:{
     type:Number,
     required:true
@@ -28,7 +28,7 @@ mongoose.connect('mongodb+srv://akshi20jain03:niXKH4b2LEX0aYea@learnings.baxbn3r
  })
 
  //created a model
- const User = mongoose.model("numbers",userSchema)
+ const User = mongoose.model("numbers",countSchema)
 
  app.get('/getdata',async(req,res)=>{
   try {
