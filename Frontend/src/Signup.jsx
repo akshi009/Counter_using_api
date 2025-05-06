@@ -6,9 +6,10 @@ import axios from "axios";
 function Signup() {
 
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
-      const [password, setPassword] = useState("");
-      const [name,setName] = useState('')
+    const [email, setEmail] = useState();
+      const [password, setPassword] = useState();
+      const [name,setName] = useState()
+      const [error,setError]=useState('')
     
     const handelSubmit = async (e) => {
       e.preventDefault();
@@ -29,6 +30,11 @@ function Signup() {
           }
       } catch (error) {
         console.error("Error creating user", error);
+        if (error.response && error.response.data && error.response.data.message) {
+          setError(error.response.data.message); // ✅ show backend error message in UI
+        } else {
+          setError("Something went wrong. Please try again."); // fallback
+        }
       }
     };
   return (
@@ -158,6 +164,12 @@ function Signup() {
 }}>
   Already Signup? <Link to='/'>Login</Link>
 </div>
+
+{error && (
+  <p style={{ color: "red", textAlign: "center", marginBottom: "15px" }}>
+    {error}
+  </p>
+)}
 
           </div>
 
